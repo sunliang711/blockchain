@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+.idea/
+datadirs/
+datadir/
+bitcoin-*
+.DS_Store
+*.swp
+.idea/

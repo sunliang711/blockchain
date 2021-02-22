@@ -1,0 +1,7 @@
+datadir="datadirs/node1-datadir"
+port="30304"
+rpcaddr="0.0.0.0"
+rpcport="8546"
+minerthreads="1"
+maxpeers=0
+logfile="${datadir}/logfile"

@@ -1,3 +1,5 @@
+# chain name: mainnet,ropsten,goerli,rinkeby,yolov2
+chain=mainnet
 datadir="datadirs/node1-datadir"
 port="30303"
 rpcaddr="0.0.0.0"

@@ -11,6 +11,7 @@ source "loadConfig.sh" 2>/dev/null || { echo "loadConfig.sh not found."; exit 1;
 
 cat<<EOF
 Start node with the following config:
+        chain: ${chain}
         datadir:  ${datadir}
         port:   ${port}
         rpcaddr: ${rpcaddr}
@@ -23,6 +24,17 @@ Start node with the following config:
 
 EOF
 
+if [ ! -d ${datadir} ];then
+    echo "Create ${datadir}..."
+    mkdir -p ${datadir}
+fi
+
+if [ -z ${chain} ];then
+    # default chain is mainnet
+    chain=mainnet
+fi
+
+option="${option} --${chain}"
 option="${option} --datadir ${datadir}"
 option="${option} --port ${port}"
 if (( "${rpcport}" > 0 && "${rpcport}" < 65535 ));then
@@ -40,5 +52,16 @@ if (( "${minerthreads}" > 0 ));then
 fi
 option="${option} --maxpeers ${maxpeers}"
 
-echo "Command line options to geth: ${option}"
+duration=5
+echo "Start geth in $duration seconds,press <ctrl-c> to quit."
+sleep $duration
+
+cat<<EOF
+
+Run eth node with: geth ${option}
+
+Issue 03-console.sh to attach console
+Issue 04-logfile.sh to check logfile
+
+EOF
 geth ${option} 2>> "${logfile}"

@@ -39,11 +39,12 @@ option="${option} --datadir ${datadir}"
 option="${option} --port ${port}"
 if (( "${rpcport}" > 0 && "${rpcport}" < 65535 ));then
     echo "Enable json rpc at: ${rpcaddr}:${rpcport}"
-    option="${option} --rpc --rpcaddr ${rpcaddr} --rpcport ${rpcport}"
+    # option="${option} --rpc --rpcaddr ${rpcaddr} --rpcport ${rpcport}"
+    option="${option} --http --http.addr ${rpcaddr} --http.port ${rpcport}"
 fi
 if (( "${wsport}" > 0 && "${wsport}" < 65535 ));then
     echo "Enable json rpc at: ${wsaddr}:${wsport}"
-    option="${option} --ws --wsaddr ${wsaddr} --wsport ${wsport} --wsapi eth,net,web3"
+    option="${option} --ws --ws.addr ${wsaddr} --ws.port ${wsport} --ws.api eth,net,web3"
 fi
 option="${option} --allow-insecure-unlock"
 if (( "${minerthreads}" > 0 ));then

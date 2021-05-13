@@ -1,0 +1,11 @@
+# chain name: mainnet,ropsten,goerli,rinkeby,yolov2
+chain=mainnet
+datadir="datadirs/mainnet-datadir"
+port="30303"
+rpcaddr="0.0.0.0"
+rpcport="8545"
+wsaddr="0.0.0.0"
+wsport="8546"
+minerthreads="0"
+maxpeers=5
+logfile="${datadir}/logfile"

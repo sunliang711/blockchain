@@ -11,7 +11,7 @@ source "loadConfig.sh" 2>/dev/null || { echo "loadConfig.sh not found."; exit 1;
 
 cat<<EOF
 Start node with the following config:
-        chain: ${chain}
+        chain(empty for private chain): ${chain}
         datadir:  ${datadir}
         port:   ${port}
         rpcaddr: ${rpcaddr}
@@ -29,12 +29,10 @@ if [ ! -d ${datadir} ];then
     mkdir -p ${datadir}
 fi
 
-if [ -z ${chain} ];then
-    # default chain is mainnet
-    chain=mainnet
-fi
 
-option="${option} --${chain}"
+if [ -n "$chain" ];then
+    option="${option} --${chain}"
+fi
 option="${option} --datadir ${datadir}"
 option="${option} --port ${port}"
 if (( "${rpcport}" > 0 && "${rpcport}" < 65535 ));then
@@ -61,8 +59,8 @@ cat<<EOF
 
 Run eth node with: geth ${option}
 
-Issue 03-console.sh to attach console
-Issue 04-logfile.sh to check logfile
+Issue 03-logfile.sh to attach console
+Issue 04-console.sh to check logfile
 
 EOF
 geth ${option} 2>> "${logfile}"

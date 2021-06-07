@@ -38,7 +38,7 @@ option="${option} --port ${port}"
 if (( "${rpcport}" > 0 && "${rpcport}" < 65535 ));then
     echo "Enable json rpc at: ${rpcaddr}:${rpcport}"
     # option="${option} --rpc --rpcaddr ${rpcaddr} --rpcport ${rpcport}"
-    option="${option} --http --http.addr ${rpcaddr} --http.port ${rpcport}"
+    option="${option} --http --http.addr ${rpcaddr} --http.port ${rpcport} --rpcvhosts=*"
 fi
 if (( "${wsport}" > 0 && "${wsport}" < 65535 ));then
     echo "Enable json rpc at: ${wsaddr}:${wsport}"

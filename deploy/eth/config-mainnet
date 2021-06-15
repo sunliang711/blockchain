@@ -7,5 +7,5 @@ rpcport="8545"
 wsaddr="0.0.0.0"
 wsport="8546"
 minerthreads="0"
-maxpeers=5
+maxpeers=20
 logfile="${datadir}/logfile"

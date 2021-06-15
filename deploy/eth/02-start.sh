@@ -9,6 +9,18 @@ cd "$root"
 
 source "loadConfig.sh" 2>/dev/null || { echo "loadConfig.sh not found."; exit 1; }
 
+
+function _wait(){
+    # secs=$((5 * 60))
+    secs=${1:?'missing seconds'}
+
+    while [ $secs -gt 0 ]; do
+       echo -ne "$secs\033[0K\r"
+       sleep 1
+       : $((secs--))
+    done
+}
+
 cat<<EOF
 Start node with the following config:
         chain(empty for private chain): ${chain}
@@ -53,7 +65,7 @@ option="${option} --maxpeers ${maxpeers}"
 
 duration=5
 echo "Start geth in $duration seconds,press <ctrl-c> to quit."
-sleep $duration
+_wait $duration
 
 cat<<EOF
 

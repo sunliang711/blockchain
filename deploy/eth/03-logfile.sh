@@ -9,4 +9,9 @@ cd "$root"
 
 source "loadConfig.sh" 2>/dev/null || { echo "loadConfig.sh not found."; exit 1; }
 
+while [ ! -e "${datadir}/logfile" ];do
+    echo "Not found ${datadir}/logfile, wait ..."
+    sleep 2
+done
+
 tail -f "${datadir}/logfile"

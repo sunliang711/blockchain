@@ -19,6 +19,7 @@ function _wait(){
        sleep 1
        : $((secs--))
     done
+    echo -ne "\033[0K\r"
 }
 
 cat<<EOF
@@ -33,6 +34,7 @@ Start node with the following config:
         minerthreads: ${minerthreads}
         maxpeers: ${maxpeers}
         logfile: ${logfile}
+        otherOptions: ${otherOptions}
 
 EOF
 
@@ -49,21 +51,23 @@ option="${option} --datadir ${datadir}"
 option="${option} --port ${port}"
 if (( "${rpcport}" > 0 && "${rpcport}" < 65535 ));then
     echo "Enable json rpc at: ${rpcaddr}:${rpcport}"
-    # option="${option} --rpc --rpcaddr ${rpcaddr} --rpcport ${rpcport}"
     option="${option} --http --http.addr ${rpcaddr} --http.port ${rpcport} --http.vhosts=*"
 fi
-if (( "${wsport}" > 0 && "${wsport}" < 65535 ));then
+if [ -n "${wsport}" ] && (( "${wsport}" > 0 && "${wsport}" < 65535 ));then
     echo "Enable json rpc at: ${wsaddr}:${wsport}"
     option="${option} --ws --ws.addr ${wsaddr} --ws.port ${wsport} --ws.api eth,net,web3"
 fi
-option="${option} --allow-insecure-unlock"
+
 if (( "${minerthreads}" > 0 ));then
     echo "Enable mine, miner threads: ${minerthreads}"
     option="${option} --mine --miner.threads ${minerthreads}"
 fi
 option="${option} --maxpeers ${maxpeers}"
 
-duration=5
+
+[ -n "${otherOptions}" ] && option="${option} ${otherOptions}"
+
+duration=3
 echo "Start geth in $duration seconds,press <ctrl-c> to quit."
 _wait $duration
 

@@ -1,11 +1,13 @@
-# chain name: mainnet,ropsten,goerli,rinkeby,yolov2
+# chain name: mainnet,ropsten,goerli,rinkeby,yolov2 OR empty
 chain=ropsten
 datadir="datadirs/node1-datadir"
 port="30308"
 rpcaddr="0.0.0.0"
 rpcport="8548"
 wsaddr="0.0.0.0"
-wsport="8548"
+# set wsport to empty to disable ws
+# wsport="8548"
 minerthreads="1"
 maxpeers=0
 logfile="${datadir}/logfile"
+otherOptions="--allow-insecure-unlock"

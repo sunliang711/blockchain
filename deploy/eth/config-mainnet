@@ -1,7 +1,7 @@
 # chain name: mainnet,ropsten,goerli,rinkeby,yolov2 OR empty
 chain=mainnet
 datadir="datadirs/mainnet-datadir"
-port="30303"
+port="30304"
 rpcaddr="0.0.0.0"
 rpcport="8545"
 wsaddr="0.0.0.0"
@@ -10,4 +10,5 @@ wsaddr="0.0.0.0"
 minerthreads="0"
 maxpeers=20
 logfile="${datadir}/logfile"
-otherOptions="--allow-insecure-unlock"
+# otherOptions="--allow-insecure-unlock --http.api \"admin,debug,web3,eth,txpool,personal ethash,miner,net\""
+otherOptions="--allow-insecure-unlock --http.api web3,eth,txpool,personal,ethash,miner"

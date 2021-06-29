@@ -227,7 +227,7 @@ start(){
     cd ${this}
     configFile=${1:?'missing config file'}
     # tmux new-session -s eth-node ./02-start.sh $configFile \; split-window -h ./03-logfile.sh $configFile \; split-window -v ./04-console.sh $configFile\;
-    tmux new-session -s eth-node  "bash 02-start.sh $configFile || bash"\; split-window -h "bash 04-console.sh $configFile || bash"\; select-pane -t 0 \; split-window -v "bash 03-logfile.sh $configFile || bash"\; select-pane -t 2 \; split-window -v\; 
+    tmux new-session -s ${configFile}  "bash 02-start.sh $configFile || bash"\; split-window -h "bash 04-console.sh $configFile || bash"\; select-pane -t 0 \; split-window -v "bash 03-logfile.sh $configFile || bash"\; select-pane -t 2 \; split-window -v\; 
     # tmux new-session \; split-window -h\; select-pane -t 0 \; split-window -v\; select-pane -t 2\; split-window -v\;
 }
 

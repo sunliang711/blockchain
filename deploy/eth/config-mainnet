@@ -1,13 +1,13 @@
 # chain name: mainnet,ropsten,goerli,rinkeby,yolov2 OR empty
 chain=mainnet
 datadir="datadirs/mainnet-datadir"
-port="30303"
+port="30309"
 rpcaddr="0.0.0.0"
-rpcport="8545"
+rpcport="8549"
 wsaddr="0.0.0.0"
 # set wsport to empty to disable ws
 # wsport="8546"
 minerthreads="0"
-maxpeers=20
+maxpeers=50
 logfile="${datadir}/logfile"
-otherOptions="--allow-insecure-unlock"
+otherOptions="--allow-insecure-unlock --metrics --http.api db,admin,net,web3,eth,txpool,personal,ethash,miner"

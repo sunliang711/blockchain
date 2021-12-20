@@ -105,7 +105,7 @@ start(){
     echo "Start bitcoind ..."
     sessionName=bitcoinNode
     # ${bitcoind} -datadir="${datadir}" -conf=${configFile}  -fallbackfee=${fallbackfee} #-daemon
-    tmux new-session -s "${sessionName}" ${bitcoind} -datadir="${datadir}" -conf=${configFile}  -fallbackfee=${fallbackfee} 
+    tmux new-session -s "${sessionName}" "${bitcoind} -datadir="${datadir}" -conf=${configFile}  -fallbackfee=${fallbackfee};bash"
 }
 
 stop(){

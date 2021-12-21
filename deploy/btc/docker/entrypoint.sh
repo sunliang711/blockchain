@@ -84,6 +84,7 @@ EOF
 # RPC related settings:
 server=1
 rest=1
+listen=0
 rpcport=${rpc_port:-${defaultRpcPort}}
 rpcbind=${rpc_bind:-${defaultRpcBind}}
 rpcuser=${rpc_user:-${defaultRpcUser}}

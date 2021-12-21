@@ -5,4 +5,5 @@ RUN mkdir /root/datadir
 COPY entrypoint.sh /root/entrypoint.sh
 
 WORKDIR /root
+EXPOSE 8338 8890
 ENTRYPOINT ["/root/entrypoint.sh","run"]

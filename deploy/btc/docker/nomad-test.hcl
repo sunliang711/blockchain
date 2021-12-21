@@ -27,8 +27,8 @@ job "bitcoin-node" {
       sticky  = false
     }
     network {
-      port "btc-p2p" { to = 8890 }
-      port "btc-rpc" { to = 8338 }
+      port "btc-p2p" { to = 8333 }
+      port "btc-rpc" { to = 8332 }
     }
     // update {
     //   max_parallel      = 1
@@ -70,7 +70,7 @@ job "bitcoin-node" {
       driver = "docker"
 
       config {
-        image = "127.0.0.1/btc-node-master:v2"
+        image = "127.0.0.1/btc-node-master:v3"
         ports = ["btc-p2p", "btc-rpc"]
       }
       volume_mount {
@@ -98,8 +98,7 @@ job "bitcoin-node" {
         port = "btc-rpc"
 
         check {
-          type     = "http"
-          path     = "/"
+          type     = "tcp"
           interval = "10s"
           timeout  = "5s"
 

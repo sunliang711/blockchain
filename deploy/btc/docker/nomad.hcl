@@ -1,21 +1,22 @@
-job "bitcoin-node" {
+job "bitcoin-node-1" {
   datacenters = ["aws-main"]
   type        = "service"
 
-  affinity {
-    attribute = "${meta.worker}"
-    value     = "1"
-    weight    = 100
-  }
+#  affinity {
+#    attribute = "${meta.worker}"
+#    value     = "1"
+#    weight    = 100
+#  }
 
   constraint {
-    attribute = "${meta.ingress}"
-    operator  = "!="
+    attribute = "${meta.node_btc}"
+    operator  = "="
     value     = "1"
   }
 
   group "bitcoin-node" {
     count = 1
+    shutdown_delay = "16s"
 
     spread {
       attribute = "${unique.hostname}"
@@ -27,8 +28,8 @@ job "bitcoin-node" {
       sticky  = false
     }
     network {
-      port "btc-p2p" { to = 8890 }
-      port "btc-rpc" { to = 8338 }
+      port "btc-p2p" { to = 8333 }
+      port "btc-rpc" { to = 8332 }
     }
     // update {
     //   max_parallel      = 1
@@ -42,17 +43,15 @@ job "bitcoin-node" {
     //   stagger           = "15s"
     // }
     scaling {
-      enabled = true
+      enabled = false
       min     = 1
-      max     = 10
+      max     = 1
     }
 
-    volume "bitcoin-node" {
-      type            = "csi"
-      read_only       = false
-      source          = "bitcoin-node_efs"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
+    volume "bitcoin_data" {
+      type      = "host"
+      read_only = false
+      source    = "bitcoin-1_data"
     }
 
     restart {
@@ -72,17 +71,17 @@ job "bitcoin-node" {
       driver = "docker"
 
       config {
-        image = "127.0.0.1/btc-node-master:v1"
-        ports = ["btc"]
+        image = "127.0.0.1/btc-node-master:v3"
+        ports = ["btc-p2p", "btc-rpc"]
       }
       volume_mount {
-        volume      = "bitcoin-node"
+        volume      = "bitcoin_data"
         destination = "/root/datadir"
         read_only   = false
       }
 
       env = {
-        "network"    = "main"
+        "network" = "main"
       }
       resources {
         cpu        = 100 # MHz， no worry, keep it as low as possible.

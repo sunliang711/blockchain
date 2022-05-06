@@ -90,6 +90,7 @@ rpcbind=${rpc_bind:-${defaultRpcBind}}
 rpcuser=${rpc_user:-${defaultRpcUser}}
 rpcpassword=${rpc_password:-${defaultRpcPassword}}
 rpcclienttimeout=${rpc_timeout:-${defaultRpcTimeout}}
+blockfilterindex=1
 EOF
 
     usedRpcAllowIps=${rpc_allowips:-${defaultRpcAllowIps}}
